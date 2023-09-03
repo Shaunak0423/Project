@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Weather App</title>
+</head>
+<style>
+
+</style>
+<body>
+    <div class="card">
+        <h1 id="Anusha"></h1>
+        <div class="wave-one"></div>
+        <div class="wave-two"></div>
+        <div class="wave-three"></div>
+
+        <div id="wcon">
+            <i class="fa-solid fa-sun" style="color: yellow;"></i>
+        </div>
+        <div class="info">
+            <h2 class="loc">
+                <i class="fa-solid fa-street-view" style="color: black;"></i>
+                {%location%},{%country%}
+            </h2>
+            <p id="date">Wed | nov 23 | 10:49AM</p>
+            <h1 class="tep">{%tempval%}</h1>
+            <h3 class="tempminmax">Min {%tempmin%}| Max {%tempmax%}</h3>
+        </div>
+    </div>
+
+    <script>
+        const curdate = document.getElementById("date");
+        let weathercon = document.getElementById("wcon");
+
+        const tempStatus = "{%tempstatus%}";
+
+        if(tempStatus == "Sunny"){
+            wcon.innerHTML = "<i class='fa-solid fa-sun' style='color: yellow;'></i>"
+        }
+
+        const getCurrentDay = () =>{
+            const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+            const d = new Date();
+            let dxy = d.getDay();
+           let currentTime = new Date();
+           let day = weekday[currentTime.getDay()]
+           return day;
+        };
+
+        const getCurrentTime = () =>{
+            var months = [
+             "Jan",
+             "Fab",
+             "Mar",
+             "Apr",
+             "May",
+             "Jun",
+             "Jul",
+             "Aug",
+             "Sep",
+             "Oct",
+             "Nov",
+             "Dec"
+            ];
+            var now = new Date();
+            var month =months[now.getMonth()];
+            var date =now.getDate();
+
+            let houre = now.getHours();
+            let min = now.getMinutes();
+
+            let period = "AM";
+
+            if(houre >11 ){
+                period = "PM";
+                if(houre > 12) houre -= 12;
+            }
+            if(min < 10){
+                min = "0" + min;
+            }
+
+           return `${month} ${date} | ${houre}:${min}${period}`;
+        };
+
+       curdate.innerHTML = getCurrentDay() + "|" + getCurrentTime();
+    </script>
+</body>
+</html>
